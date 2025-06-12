@@ -1,0 +1,23 @@
+<form id="formCompra">
+  <!-- outros campos -->
+  <label for="discordID">Seu ID do Discord:</label>
+  <input type="text" id="discordID" name="discordID" required placeholder="Ex: 123456789012345678">
+  
+  <button type="submit">Comprar</button>
+</form>
+
+<script>
+  document.getElementById('formCompra').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const discordID = document.getElementById('discordID').value;
+
+    const res = await fetch('https://SEU-BACKEND.onrender.com/webhook-compra', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ discordID })
+    });
+
+    const msg = await res.text();
+    alert(msg);
+  });
+</script>
